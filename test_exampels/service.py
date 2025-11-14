@@ -1,9 +1,10 @@
 """Sample service class to showcase some test options."""
+
 from typing import Any
 
 import requests
-# relative import possible, as service and config are "tightly coupled" aka are just used together
-from .config import API_URL, TIMEOUT
+
+from test_exampels.config import API_URL, TIMEOUT
 
 
 class Service:
@@ -24,6 +25,6 @@ class Service:
         return response.json()
 
     @staticmethod
-    def multiply(a: int, b:int) -> int:
+    def multiply(a: int, b: int) -> int:
         """Multiply two integers."""
         return a * b

@@ -1,12 +1,12 @@
 """Tests for service class."""
 
 from unittest.mock import MagicMock, patch
-from src import service as sv  # Service cannot be imported yet as otherwise patching would have no effect
+from test_exampels import service as sv
 
 
 def test_mock_function():
     """Test using patch to replace a method call requests.get with a MagicMock with in a method of a class."""
-    with patch("src.service.requests.get") as mock_get:
+    with patch("test_exampels.service.requests.get") as mock_get:
         mock_response = MagicMock()
         # return_value is what will be returned when called
         #  here: print(
@@ -22,7 +22,7 @@ def test_mock_function():
 
 def test_mock_class():
     """Test to mock a method of the Service class directly."""
-    with patch("src.service.Service") as MockService:
+    with patch("test_exampels.service.Service") as MockService:
         instance = MockService.return_value
         instance.fetch_data.return_value = {"fake": True}
 
@@ -48,7 +48,7 @@ def test_mock_attribute(sample_service):
 
 def test_fetch_data_uses_patched_url(patched_api_url):
     """Test where a constant got mocked."""
-    with patch("src.service.requests.get") as mock_get:
+    with patch("test_exampels.service.requests.get") as mock_get:
         # patch requests.get to check later if it got called with mocked URL (just for demonstration)
         mock_response = MagicMock()
         mock_response.json.return_value = {"status": "ok"}
@@ -61,4 +61,3 @@ def test_fetch_data_uses_patched_url(patched_api_url):
 
         # just a check if url got mocked (usually it is not tested if mocking succeeded)
         mock_get.assert_called_once_with("https://mocked.com/endpoint", timeout=5)
-
